@@ -1,0 +1,6 @@
+{
+    "name": "interfaces",
+    "dependencies": {
+        "mongodb": "^5.1.0"
+    }
+}

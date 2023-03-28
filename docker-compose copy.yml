@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  app1:
+    container_name: first-app
+    build: 
+      context: .
+      dockerfile: ./apps/app1/Dockerfile
+    ports:
+      - 8001:8001
+    networks:
+      - app-network
+    expose:
+      - "8001"
+    restart:
+      unless-stopped
+    environment:
+      - PORT_1=8001
+  app2:
+    container_name: second-app
+    build: 
+      context: .
+      dockerfile: ./apps/app2/Dockerfile
+    ports:
+      - 8002:8002
+    networks:
+      - app-network
+    expose:
+      - "8002"
+    restart:
+      unless-stopped
+    environment:
+      - PORT_2=8002
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+networks:
+  app-network:
+    external: true
+
+volumes:
+  mongodb_data_container:

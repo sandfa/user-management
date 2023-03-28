@@ -1,0 +1,6 @@
+{
+    "name": "mongo",
+    "dependencies": {
+        "mongodb": "^5.1.0"
+    }
+}
